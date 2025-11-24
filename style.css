@@ -10,13 +10,13 @@
 }
 
 body.dark-mode {
-  --bg-radial-center: #cfcfcf;
-  --bg-radial-edge: #1a1a1a;
-  --book-color: #555555;
+  --bg-radial-center: #e0e0e0;
+  --bg-radial-edge: #2a2a2a;
+  --book-color: #888888;
   --gold: #e0e0e0;
   --page-color: #f2f2f2;
   --text-color: #000000;
-  --star-opacity: 3;
+  --star-opacity: 4;
   --library-opacity: 0;
 }
 
@@ -33,7 +33,11 @@ body {
 }
 
 .library-bg {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(circle at center, var(--bg-radial-center), var(--bg-radial-edge));
   opacity: var(--library-opacity);
   transition: opacity 1.5s ease;
@@ -41,18 +45,24 @@ body {
 }
 
 .stars-container {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
   opacity: var(--star-opacity);
-  transition: opacity 1.5s ease;
+  transition: opacity 2s ease-in-out;
 }
 
 body:not(.dark-mode) .stars-container {
-    opacity: 0 !important;
+  opacity: 0 !important;
 }
 
 .stars-layer {
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   background-image:
     radial-gradient(1px 1px at 10px 10px, #fff, transparent), radial-gradient(1px 1px at 50px 80px, #fff, transparent),
     radial-gradient(2px 2px at 120px 30px, #eee, transparent), radial-gradient(2px 2px at 180px 150px, #fff, transparent),
@@ -66,9 +76,9 @@ body:not(.dark-mode) .stars-container {
   animation: moveStars linear infinite;
 }
 
-.layer-1 { background-size: 500px 500px; animation-duration: 60s; opacity: 0.9; }
-.layer-2 { background-size: 800px 800px; animation-duration: 100s; opacity: 1; }
-.layer-3 { background-size: 400px 400px; animation-duration: 150s; opacity: 1.2; }
+.layer-1 { background-size: 500px 500px; animation-duration: 60s; opacity: 1; }
+.layer-2 { background-size: 800px 800px; animation-duration: 100s; opacity: 1.2; }
+.layer-3 { background-size: 400px 400px; animation-duration: 150s; opacity: 1.5; }
 
 @keyframes moveStars {
   from { transform: translateY(0); }
@@ -78,30 +88,46 @@ body:not(.dark-mode) .stars-container {
 .controls { position: absolute; top: 30px; z-index: 100; }
 
 button {
-  padding: 12px 25px; border: 2px solid var(--gold); border-radius: 30px;
-  background: rgba(0,0,0,0.6); color: var(--gold);
-  font-family: 'Georgia', serif; font-size: 1em; cursor: pointer;
-  transition: 0.3s; backdrop-filter: blur(5px);
+  padding: 12px 25px;
+  border: 2px solid var(--gold);
+  border-radius: 30px;
+  background: rgba(0,0,0,0.6);
+  color: var(--gold);
+  font-family: 'Georgia', serif;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.3s;
+  backdrop-filter: blur(5px);
 }
 
 button:hover { background: var(--gold); color: #000; transform: scale(1.05); }
 
 .book-container {
-  position: relative; width: 320px; height: 460px;
-  transform-style: preserve-3d; cursor: pointer;
+  position: relative;
+  width: 320px;
+  height: 460px;
+  transform-style: preserve-3d;
+  cursor: pointer;
   transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .book-container.open { transform: translateX(160px); }
 
 .book {
-  width: 100%; height: 100%; position: relative;
+  width: 100%;
+  height: 100%;
+  position: relative;
   transform-style: preserve-3d;
 }
 
 .page {
-  position: absolute; width: 100%; height: 100%; top: 0; left: 0;
-  transform-origin: left; transform-style: preserve-3d;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform-origin: left;
+  transform-style: preserve-3d;
   border-radius: 4px 12px 12px 4px;
   background: var(--page-color);
   box-shadow: inset 15px 0 30px rgba(0,0,0,0.1), 2px 0 5px rgba(0,0,0,0.1);
@@ -135,14 +161,19 @@ button:hover { background: var(--gold); color: #000; transform: scale(1.05); }
 }
 
 .back-cover {
-  background: var(--book-color); z-index: 0;
+  background: var(--book-color);
+  z-index: 0;
   transform: translateZ(-30px);
   box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
   transition: background-color 1s;
 }
 
 .spine {
-  position: absolute; top: 0; left: 0; width: 30px; height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
   background: #3e2723;
   transform: rotateY(-90deg) translateX(-15px);
   transform-origin: left;
