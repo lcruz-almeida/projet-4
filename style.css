@@ -47,6 +47,10 @@ body {
   transition: opacity 1.5s ease;
 }
 
+body:not(.dark-mode) .stars-container {
+    opacity: 0 !important;
+}
+
 .stars-layer {
   position: absolute; inset: 0;
   background-image:
