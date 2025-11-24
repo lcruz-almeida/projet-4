@@ -21,9 +21,13 @@ function playSound(audioId) {
 
 function toggleTheme() {
     body.classList.toggle('dark-mode');
-    // Si vous avez un son pour le thème
-    // playSound('soundTheme'); 
+    
+    body.style.transition = 'background 1.5s ease, color 1.5s ease';
+    setTimeout(() => {
+        body.style.transition = ''; // remove depois da transição
+    }, 1600);
 }
+
 
 function toggleBook() {
     isOpen = !isOpen;
