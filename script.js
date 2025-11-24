@@ -56,8 +56,8 @@ function createParticle() {
     particle.style.boxShadow = `0 0 ${size * 3}px ${color}`;
 
     const rect = bookContainer.getBoundingClientRect();
-    const startX = rect.left; 
-    const startY = rect.top + rect.height / 2 + (Math.random() * 150 - 75); 
+    const startX = rect.left + rect.width / 2; 
+    const startY = rect.top + rect.height / 2 + (Math.random() * 120 - 60); 
 
     particle.style.left = `${startX}px`;
     particle.style.top = `${startY}px`;
