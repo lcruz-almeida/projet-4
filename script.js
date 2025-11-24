@@ -4,58 +4,29 @@ let isOpen = false;
 let particleInterval;
 let magicTimeout;
 
-// Couleurs magiques (Or, Violet, Bleu, Blanc)
-const colors = ['#ffd700', '#ff9a9e', '#a18cd1', '#ffffff', '#84fab0'];
-
-// ===============================================
-// FONCTION POUR JOUER UN SON
-// ===============================================
 function playSound(audioId) {
     const audio = document.getElementById(audioId);
     if (audio) {
-        audio.currentTime = 0; // Rembobine si déjà en cours de lecture
+        audio.currentTime = 0;
         audio.play().catch(e => console.log("Erreur de lecture audio : " + e));
     }
 }
-// ===============================================
 
 function toggleTheme() {
     body.classList.toggle('dark-mode');
-    
     body.style.transition = 'background 1.5s ease, color 1.5s ease';
-    setTimeout(() => {
-        body.style.transition = ''; // remove depois da transição
-    }, 1600);
+    setTimeout(() => { body.style.transition = ''; }, 1600);
 }
-
 
 function toggleBook() {
     isOpen = !isOpen;
-    
-    // Si vous avez un son pour l'ouverture du livre
-    // playSound('soundBook'); 
-
     if (isOpen) {
         bookContainer.classList.add('open');
-        
-        // ===============================================
-        // DÉCLENCHEMENT DES SONS DE PAGE AU FEUILLETAGE
-        // ===============================================
-        const pageTurnDelay = 200; // Délai en ms entre chaque son de page
-        
-        // Page 1 (démarrage à 300ms après le clic)
-        setTimeout(() => { playSound('soundPage'); }, 300); 
-        
-        // Page 2
-        setTimeout(() => { playSound('soundPage'); }, 300 + pageTurnDelay); 
-        
-        // Page 3
-        setTimeout(() => { playSound('soundPage'); }, 300 + (2 * pageTurnDelay)); 
-        // ===============================================
-
-        // Lancement de la magie après que toutes les pages sont tournées
-        magicTimeout = setTimeout(startMagic, 2200); 
-        
+        const pageTurnDelay = 200;
+        setTimeout(() => { playSound('soundPage'); }, 300);
+        setTimeout(() => { playSound('soundPage'); }, 300 + pageTurnDelay);
+        setTimeout(() => { playSound('soundPage'); }, 300 + 2 * pageTurnDelay);
+        magicTimeout = setTimeout(startMagic, 2200);
     } else {
         bookContainer.classList.remove('open');
         clearTimeout(magicTimeout);
@@ -63,61 +34,52 @@ function toggleBook() {
     }
 }
 
-// Créer une particule
 function createParticle() {
-    // Sécurité : Si le livre n'est plus ouvert, on arrête
     if (!isOpen) return;
 
     const particle = document.createElement('div');
     particle.classList.add('particle');
-    
-    // Taille aléatoire (petite et grande)
-    const size = Math.random() * 8 + 3; 
+
+    const size = Math.random() * 12 + 4;
     particle.style.width = `${size}px`;
     particle.style.height = `${size}px`;
-    
-    // Couleur aléatoire + Glow
+
+    let colors;
+    if (body.classList.contains('dark-mode')) {
+        colors = ['#ffffff', '#cfcfcf', '#a0a0ff', '#ffd700'];
+    } else {
+        colors = ['#ffd700', '#ff9a9e', '#a18cd1', '#ffffff', '#84fab0'];
+    }
+
     const color = colors[Math.floor(Math.random() * colors.length)];
     particle.style.background = color;
-    particle.style.boxShadow = `0 0 ${size * 2}px ${color}`;
+    particle.style.boxShadow = `0 0 ${size * 3}px ${color}`;
 
-    // POSITIONNEMENT CRITIQUE
     const rect = bookContainer.getBoundingClientRect();
-    const startX = rect.left; 
-    const startY = rect.top + rect.height / 2 + (Math.random() * 150 - 75); 
-    
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.top + rect.height / 2 + (Math.random() * 150 - 75);
+
     particle.style.left = `${startX}px`;
     particle.style.top = `${startY}px`;
 
-    // Définition des trajectoires (Variables CSS pour l'animation)
-    const tx = (Math.random() - 0.5) * 50; 
-    const txEnd = (Math.random() - 0.5) * 400; 
-    
+    const tx = (Math.random() - 0.5) * 100;
+    const txEnd = (Math.random() - 0.5) * 600;
+
     particle.style.setProperty('--tx', `${tx}px`);
     particle.style.setProperty('--tx-end', `${txEnd}px`);
 
-    // Vitesse
-    const duration = Math.random() * 2 + 2; 
+    const duration = Math.random() * 2 + 2;
     particle.style.animation = `floatUp ${duration}s ease-out forwards`;
 
     document.body.appendChild(particle);
 
-    // Nettoyage du DOM
-    setTimeout(() => {
-        particle.remove();
-    }, duration * 1000);
+    setTimeout(() => { particle.remove(); }, duration * 1000);
 }
 
 function startMagic() {
     stopMagic();
-    
-    // Si vous avez un son pour la magie
-    // playSound('soundMagic');
-    
-    // Explosion initiale
-    for(let i=0; i<20; i++) setTimeout(createParticle, i * 50);
-    // Flux continu
-    particleInterval = setInterval(createParticle, 50);
+    for(let i = 0; i < 50; i++) setTimeout(createParticle, i * 30);
+    particleInterval = setInterval(createParticle, 25);
 }
 
 function stopMagic() {
