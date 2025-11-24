@@ -40,7 +40,7 @@ function createParticle() {
     const particle = document.createElement('div');
     particle.classList.add('particle');
 
-    const size = Math.random() * 14 + 5; // partículas maiores e mais visíveis
+    const size = Math.random() * 14 + 5; 
     particle.style.width = `${size}px`;
     particle.style.height = `${size}px`;
 
@@ -56,8 +56,8 @@ function createParticle() {
     particle.style.boxShadow = `0 0 ${size * 3}px ${color}`;
 
     const rect = bookContainer.getBoundingClientRect();
-    const startX = rect.left + rect.width / 2;
-    const startY = rect.top + rect.height / 2 + (Math.random() * 120 - 60);
+    const startX = rect.left; 
+    const startY = rect.top + rect.height / 2 + (Math.random() * 150 - 75); 
 
     particle.style.left = `${startX}px`;
     particle.style.top = `${startY}px`;
@@ -78,9 +78,8 @@ function createParticle() {
 
 function startMagic() {
     stopMagic();
-    for(let i = 0; i < 70; i++) setTimeout(createParticle, i * 25); // explosão inicial mais intensa
-    particleInterval = setInterval(createParticle, 20); // fluxo contínuo mais rápido
-}
+    for(let i = 0; i < 70; i++) setTimeout(createParticle, i * 25); 
+    particleInterval = setInterval(createParticle, 20); 
 
 function stopMagic() {
     if (particleInterval) clearInterval(particleInterval);
