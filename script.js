@@ -40,15 +40,15 @@ function createParticle() {
     const particle = document.createElement('div');
     particle.classList.add('particle');
 
-    const size = Math.random() * 12 + 4;
+    const size = Math.random() * 14 + 5; // partículas maiores e mais visíveis
     particle.style.width = `${size}px`;
     particle.style.height = `${size}px`;
 
     let colors;
     if (body.classList.contains('dark-mode')) {
-        colors = ['#ffffff', '#cfcfcf', '#a0a0ff', '#ffd700'];
+        colors = ['#ffffff', '#cfcfcf', '#a0a0ff', '#ffd700', '#e0e0ff'];
     } else {
-        colors = ['#ffd700', '#ff9a9e', '#a18cd1', '#ffffff', '#84fab0'];
+        colors = ['#ffd700', '#ff9a9e', '#a18cd1', '#ffffff', '#ffb6c1'];
     }
 
     const color = colors[Math.floor(Math.random() * colors.length)];
@@ -57,13 +57,13 @@ function createParticle() {
 
     const rect = bookContainer.getBoundingClientRect();
     const startX = rect.left + rect.width / 2;
-    const startY = rect.top + rect.height / 2 + (Math.random() * 150 - 75);
+    const startY = rect.top + rect.height / 2 + (Math.random() * 120 - 60);
 
     particle.style.left = `${startX}px`;
     particle.style.top = `${startY}px`;
 
-    const tx = (Math.random() - 0.5) * 100;
-    const txEnd = (Math.random() - 0.5) * 600;
+    const tx = (Math.random() - 0.5) * 120;
+    const txEnd = (Math.random() - 0.5) * 700;
 
     particle.style.setProperty('--tx', `${tx}px`);
     particle.style.setProperty('--tx-end', `${txEnd}px`);
@@ -78,8 +78,8 @@ function createParticle() {
 
 function startMagic() {
     stopMagic();
-    for(let i = 0; i < 50; i++) setTimeout(createParticle, i * 30);
-    particleInterval = setInterval(createParticle, 25);
+    for(let i = 0; i < 70; i++) setTimeout(createParticle, i * 25); // explosão inicial mais intensa
+    particleInterval = setInterval(createParticle, 20); // fluxo contínuo mais rápido
 }
 
 function stopMagic() {
