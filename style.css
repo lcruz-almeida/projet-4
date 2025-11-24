@@ -1,14 +1,13 @@
 /* --- VARIABLES --- */
 :root {
-    /* Mode Bibliothèque (Par défaut) */
-    --bg-radial-center: #8e5e48;
-    --bg-radial-edge: #2c1810;
-    --book-color: #5d2e22;
-    --gold: #f5deb3;
-    --page-color: #f5deb3;
-    --text-color: #f5deb3;
-    --star-opacity: 0;
-    --library-opacity: 1;
+  --bg-radial-center: #d8b1e1;
+  --bg-radial-edge: #9573b9;
+  --book-color: #5b2e8a;
+  --gold: #f5deb3;
+  --page-color: #e7d6f0;
+  --text-color: #e7d6f0;
+  --star-opacity: 0;
+  --library-opacity: 1;
 }
 
 body.dark-mode {
